@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Title -->
+    <title>grandspce</title>
+    <meta charset="utf-8">
+
+
+    <!-- MOBILE SPECIFIC -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
+    <link href="vendor/jqvmap/css/jqvmap.min.css" rel="stylesheet">
+    <link href="vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
+    <link href="Backend_css/style.css" rel="stylesheet">
+    <script type="module" src="client.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Include Chart.js library -->
+
+</head>
+
+<body>
+
+    <!--*******************
+        Preloader start
+    ********************-->
+    <my-client></my-client>
+
+    <!--**********************************
+            Content body start
+        ***********************************-->
+    <div class="content-body">
+        <!-- row -->
+        <div class="container-fluid">
+
+
+            <div class="row sg_card_body sg_maneger_card_body">
+                <div class="col-md-3 col-xl-3">
+                    <div class="gs_payment_cards_box">
+                        <div class="solution_card">
+                            <div class="hover_color_bubble"></div>
+                            <h3>Total Due</h3>
+                            <div class="sg_payment_card_body">
+                                <div class="so_top_icon">
+                                    <img src="images/maneger-total-project.svg" alt="">
+                                </div>
+                                <div class="sg_payment_card_title">
+                                    <h4 class="counter">500</h4>
+                                    <button type="button" class="read_more_btn">View More</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-xl-3">
+                    <div class="gs_payment_cards_box">
+                        <div class="solution_card">
+                            <div class="hover_color_bubble"></div>
+                            <h3>Total Payed</h3>
+                            <div class="sg_payment_card_body">
+                                <div class="so_top_icon">
+                                    <img src="images/Active Project.svg" alt="">
+                                </div>
+                                <div class="sg_payment_card_title">
+                                    <h4 class="counter">200</h4>
+                                    <button type="button" class="read_more_btn">View More</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-xl-3">
+                    <div class="gs_payment_cards_box">
+                        <div class="solution_card">
+                            <div class="hover_color_bubble"></div>
+                            <h3>Totale Payed Installment</h3>
+                            <div class="sg_payment_card_body">
+                                <div class="so_top_icon">
+                                    <img src="./images/complete_project.svg" alt="">
+                                </div>
+                                <div class="sg_payment_card_title">
+                                    <h4 class="counter">500</h4>
+                                    <button type="button" class="read_more_btn">View More</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-xl-3">
+                    <div class="gs_payment_cards_box">
+                        <div class="solution_card">
+                            <div class="hover_color_bubble"></div>
+                            <h3>Next Due Date</h3>
+                            <div class="sg_payment_card_body">
+                                <div class="so_top_icon">
+                                    <img src="images/Long-pending-due.svg" alt="">
+                                </div>
+                                <div class="sg_payment_card_title">
+                                    <h4 class="counter">500</h4>
+                                    <button type="button" class="read_more_btn">View More</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+            <div class="row mt-10">
+
+                <!-- <div class="next-btn d-flex justify-content-end col-sm-12">
+                    <button class="client_details_add_bottn" onclick="window.location.href='manegeradd.html';">
+                        ADD
+                    </button>
+                </div> -->
+
+                <div class="col-xl-12">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="card ">
+                                    <div class="sg_chart_conainer">
+                                        <div class="row">
+                                            <div class="col-lg-8">
+                                                <div class="gs-client-Weekly-Sales-card">
+                                                    <h2>Weekly Report</h2>
+
+                                                    <!-- Chart Container -->
+                                                    <div class="chart-container">
+                                                        <canvas id="salesChart" width="1032" height="516"
+                                                            style="display: block; box-sizing: border-box; height: 516px; width: 1032px;"></canvas>
+                                                    </div>
+                                                    <!-- Summary Section -->
+                                                    <div class="gs_summary_title">
+                                                        <div class="summary-item">
+                                                            <h3>Current Week</h3>
+                                                            <p>$506.54</p>
+                                                        </div>
+                                                        <div class="summary-item">
+                                                            <h3>Previous Week</h3>
+                                                            <p>$305.25</p>
+                                                        </div>
+                                                        <div class="summary-item">
+                                                            <h3>Conversation</h3>
+                                                            <p>3.27%</p>
+                                                        </div>
+                                                        <div class="summary-item">
+                                                            <h3>Customers</h3>
+                                                            <p>3k</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-xxl-4 col-lg-6">
+                                                <div class="card">
+                                                    <div class="card-header border-0 pb-0">
+                                                        <h4 class="card-title">Installment History</h4>
+                                                    </div>
+                                                    <div class="card-body sg_card_body">
+                                                        <div id="DZ_W_TimeLine11"
+                                                            class="widget-timeline dz-scroll my-4 px-4 style-1 height370">
+                                                            <ul class="timeline">
+                                                                <li>
+                                                                    <div class="timeline-badge primary"></div>
+                                                                    <a class="timeline-panel text-muted"
+                                                                        href="javascript:void(0);">
+                                                                        <span>1 Month</span>
+                                                                        <h6 class="mb-0">05/1/2025<br><strong
+                                                                                class="text-primary">$2500</strong>.
+                                                                        </h6>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <div class="timeline-badge info">
+                                                                    </div>
+                                                                    <a class="timeline-panel text-muted"
+                                                                        href="javascript:void(0);">
+                                                                        <span>2 Month</span>
+                                                                        <h6 class="mb-0">07/02/2025<br><strong
+                                                                                class="text-info">$2500</strong>
+                                                                        </h6>
+
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <div class="timeline-badge danger">
+                                                                    </div>
+                                                                    <a class="timeline-panel text-muted"
+                                                                        href="javascript:void(0);">
+                                                                        <span>3 Month</span>
+                                                                        <h6 class="mb-0">07/02/2025<br><strong
+                                                                                class="text-warning">
+                                                                                $2500</strong></h6>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <div class="timeline-badge success">
+                                                                    </div>
+                                                                    <a class="timeline-panel text-muted"
+                                                                        href="javascript:void(0);">
+                                                                        <span>4 Month</span>
+                                                                        <h6 class="mb-0">07/02/2025<br><strong
+                                                                                class="text-warning">
+                                                                                $2500</strong></h6>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <div class="timeline-badge warning">
+                                                                    </div>
+                                                                    <a class="timeline-panel text-muted"
+                                                                        href="javascript:void(0);">
+                                                                        <span>4 Month</span>
+                                                                        <h6 class="mb-0">07/02/2025<br><strong
+                                                                                class="text-warning">
+                                                                                $2500</strong></h6>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <div class="timeline-badge dark">
+                                                                    </div>
+                                                                    <a class="timeline-panel text-muted"
+                                                                        href="javascript:void(0);">
+                                                                        <span>4 Month</span>
+                                                                        <h6 class="mb-0">07/02/2025<br><strong
+                                                                                class="text-warning">
+                                                                                $2500</strong></h6>
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!--**********************************
+            Content body end
+        ***********************************-->
+
+    <!--**********************************
+            Footer start
+        ***********************************-->
+    <div class="footer">
+        <div class="copyright">
+            <p>Copyright © Designed &amp; Developed by <a href="http://cyfrife.com/" target="_blank">cyfrife.com</a>
+                <span class="current-year">2025</span>
+            </p>
+        </div>
+    </div>
+    <!--**********************************
+            Footer end
+        ***********************************-->
+
+    <!--**********************************
+           Support ticket button start
+        ***********************************-->
+
+    <!--**********************************
+           Support ticket button end
+        ***********************************-->
+
+
+    </div>
+
+
+
+
+
+    <script>
+        // Data for the chart
+        const data = {
+            labels: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+            datasets: [
+                {
+                    label: 'Revenue',
+                    data: [400, 500, 450, 550, 300, 520, 350],
+                    backgroundColor: 'rgba(66, 165, 245, 0.7)',
+                    borderColor: 'rgba(66, 165, 245, 1)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'Sales',
+                    data: [300, 400, 350, 500, 250, 450, 300],
+                    backgroundColor: 'rgba(33, 33, 33, 0.7)',
+                    borderColor: 'rgba(33, 33, 33, 1)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'Profit',
+                    data: [250, 350, 300, 480, 200, 420, 250],
+                    backgroundColor: 'rgba(158, 158, 158, 0.7)',
+                    borderColor: 'rgba(158, 158, 158, 1)',
+                    borderWidth: 1
+                }
+            ]
+        };
+
+        // Configuration for the chart
+        const config = {
+            type: 'bar',
+            data: data,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    },
+                },
+                scales: {
+                    y: {
+                        title: {
+                            display: true,
+                            text: '$ (thousands)'
+                        },
+                        beginAtZero: true
+                    }
+                }
+            }
+        };
+
+        // Render the chart
+        const salesChart = new Chart(
+            document.getElementById('salesChart'),
+            config
+        );
+    </script>
+
+
+    <!-- photo uplored -->
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#image')
+                        .attr('src', e.target.result);
+                    // Show the submit button
+                    $('#submitButton').show();
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function submitImage() {
+            alert("Image submitted successfully!");
+        }
+    </script>
+    <!-- counters -->
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const counters = document.querySelectorAll(".counter");
+
+            counters.forEach(counter => {
+                const targetValue = parseInt(counter.textContent, 10); // Get target value from text content
+                const duration = 100; // Animation duration in milliseconds
+                const stepTime = Math.abs(Math.floor(duration / targetValue));
+                let currentValue = 0;
+
+                const incrementCounter = () => {
+                    currentValue += 1;
+                    counter.textContent = currentValue;
+                    if (currentValue < targetValue) {
+                        setTimeout(incrementCounter, stepTime);
+                    } else {
+                        counter.textContent = targetValue; // Ensure the final value is exact
+                    }
+                };
+
+                incrementCounter();
+            });
+        });
+    </script>
+
+
+
+
+
+
+
+    <script src="vendor/global/global.min.js"></script>
+    <script src="vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+
+    <!-- Datatable -->
+    <script src="vendor/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="js/plugins-init/datatables.init.js"></script>
+
+    <script src="js/custom.min.js"></script>
+    <script src="js/deznav-init.js"></script>
+    <script src="js/manager-dashbord/manager_details.js"></script>
+
+</body>
+
+</html>
