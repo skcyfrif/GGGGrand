@@ -8,13 +8,11 @@ RUN apt-get update && apt-get install -y maven
 WORKDIR /app
 
 # Step 3: Copy the pom.xml and source code into the container
-# Copy pom.xml first to leverage Docker cache for dependencies
-# Step 3: Copy the pom.xml and source code into the container
 COPY pom.xml ./pom.xml
 COPY src ./src
 
 # Step 4: Run Maven to build the project (without running tests)
-RUN mvn clean install -DskipTests -f ./pom.xml
+RUN mvn clean install -DskipTests
 
 # Step 5: Use another OpenJDK image for the runtime environment (final image)
 FROM openjdk:17-jdk-slim
