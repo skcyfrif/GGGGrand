@@ -100,17 +100,11 @@ pipeline {
             }
         }
 
-         stage('Build GrandSpaceProject') {
+        stage('Build and Package') {
             steps {
-                dir('GrandSpaceProject') {
-                    script {
-                        echo "Building GrandSpaceProject..."
-                        sh 'mvn clean install'
-                        echo "Building Docker image for GrandSpaceProject..."
-                        sh """
-                        docker build -t ${REGISTRY}/${IMAGE_NAME_BACKEND}:${BUILD_TAG} .
-                        """
-                    }
+                script {
+                    echo "Building the application..."
+                    sh 'mvn clean package -DskipTests'
                 }
             }
         }
