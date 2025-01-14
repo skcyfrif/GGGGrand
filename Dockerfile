@@ -26,7 +26,7 @@ WORKDIR /app
 COPY --from=build /app/target/grandspace.jar /app/grandspace.jar
 
 # Expose the port the application will run on (default for Spring Boot is 9090)
-EXPOSE 9090
+EXPOSE 9091
 
 # Step 6: Run the Spring Boot application
 ENTRYPOINT ["java", "-jar", "grandspace.jar"]
