@@ -29,14 +29,14 @@ pipeline {
             }
         }
 
-        stage('Build and Package') {
-            steps {
-                script {
-                    echo "Building the application..."
-                    sh 'mvn clean package -DskipTests -f GrandSpaceProject/pom.xml'
-                }
-            }
-        }
+        // stage('Build and Package') {
+        //     steps {
+        //         script {
+        //             echo "Building the application..."
+        //             sh 'mvn clean package -DskipTests -f GrandSpaceProject/pom.xml'
+        //         }
+        //     }
+        // }
 
         stage('Create Docker Network') {
             steps {
