@@ -4,7 +4,7 @@ pipeline {
     environment {
         REGISTRY = "docker.io"
         IMAGE_NAME_BACKEND = "mygr"
-        DOCKER_CREDENTIALS_ID = 'cyfdoc'  // Update this to your Docker Hub credentials ID in Jenkins
+        DOCKER_CREDENTIALS_ID = 'cyfdoc'  // Jenkins Docker Hub credentials
         BUILD_TAG = "${env.BUILD_NUMBER}"
         SPRING_DATASOURCE_URL = "jdbc:mysql://172.22.0.2:3306/grandspace?createDatabaseIfNotExist=true"
         SPRING_DATASOURCE_USERNAME = "root"
@@ -45,7 +45,6 @@ pipeline {
                 script {
                     echo "Starting MySQL container..."
                     sh """
-                    # Check if the container is running or exists
                     if docker ps --filter "name=${DB_CONTAINER}" | grep -q ${DB_CONTAINER}; then
                         echo "Container ${DB_CONTAINER} is already running."
                     elif docker ps -a --filter "name=${DB_CONTAINER}" | grep -q ${DB_CONTAINER}; then
@@ -100,14 +99,24 @@ pipeline {
             }
         }
 
-        stage('Push Images to Docker Hub') {
+        stage('Build Docker Image') {
             steps {
                 script {
-                    echo "Pushing images to Docker Hub..."
+                    echo "Building Docker image..."
+                    sh """
+                    docker build -t ${IMAGE_NAME_BACKEND}:${BUILD_TAG} .
+                    """
+                }
+            }
+        }
+
+        stage('Tag and Push Docker Image') {
+            steps {
+                script {
+                    echo "Tagging and pushing Docker image to Docker Hub..."
                     docker.withRegistry('https://index.docker.io/v1/', "${DOCKER_CREDENTIALS_ID}") {
-                        // Tagging and pushing backend image
                         sh """
-                        docker tag ${REGISTRY}/${IMAGE_NAME_BACKEND}:${BUILD_TAG} ${REGISTRY}/cyfdoc/${IMAGE_NAME_BACKEND}:${BUILD_TAG}
+                        docker tag ${IMAGE_NAME_BACKEND}:${BUILD_TAG} ${REGISTRY}/cyfdoc/${IMAGE_NAME_BACKEND}:${BUILD_TAG}
                         docker push ${REGISTRY}/cyfdoc/${IMAGE_NAME_BACKEND}:${BUILD_TAG}
                         """
                     }
@@ -115,28 +124,26 @@ pipeline {
             }
         }
 
-        stage('Deploy Grandspace') {
+        stage('Deploy Backend Container') {
             steps {
                 script {
-                    echo "Updating GrandSpaceProject container..."
+                    echo "Deploying the backend container..."
                     sh """
-                    # Check if the backend container exists and remove it if necessary
                     docker ps -a -q --filter "name=${BACKEND_CONTAINER}" | grep -q . && \
                     docker rm -f ${BACKEND_CONTAINER} || echo "No existing backend container to remove."
 
-                    # Run a new backend container
                     docker run -d --name ${BACKEND_CONTAINER} \
                         --network ${DOCKER_NETWORK} \
                         -e SPRING_DATASOURCE_URL=${SPRING_DATASOURCE_URL} \
                         -e SPRING_DATASOURCE_USERNAME=${SPRING_DATASOURCE_USERNAME} \
                         -e SPRING_DATASOURCE_PASSWORD=${SPRING_DATASOURCE_PASSWORD} \
-                        -p 9070:9090 ${REGISTRY}/cyfdoc/${IMAGE_NAME_BACKEND}:${BUILD_TAG}
+                        -p 9070:9091 ${REGISTRY}/cyfdoc/${IMAGE_NAME_BACKEND}:${BUILD_TAG}
                     """
                 }
             }
         }
 
-        stage('Cleanup Unused Resources') {
+        stage('Cleanup Resources') {
             steps {
                 script {
                     echo "Cleaning up unused Docker resources..."
