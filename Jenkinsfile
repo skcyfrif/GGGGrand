@@ -25,6 +25,17 @@ pipeline {
                 script {
                     echo "Cloning repository..."
                     checkout scm
+                    echo "Listing files in workspace root..."
+                    sh "ls -l"
+                }
+            }
+        }
+
+        stage('Build and Package') {
+            steps {
+                script {
+                    echo "Building the application..."
+                    sh 'mvn clean package -DskipTests'
                 }
             }
         }
