@@ -117,8 +117,8 @@ pipeline {
                     docker.withRegistry('https://index.docker.io/v1/', "${DOCKER_CREDENTIALS_ID}") {
                         // Tagging and pushing backend image
                         sh """
-                        docker tag ${REGISTRY}/${IMAGE_NAME_BACKEND}:${BUILD_TAG} ${REGISTRY}/shiva/${IMAGE_NAME_BACKEND}:${BUILD_TAG}
-                        docker push ${REGISTRY}/shiva/${IMAGE_NAME_BACKEND}:${BUILD_TAG}
+                        docker tag ${REGISTRY}/${IMAGE_NAME_BACKEND}:${BUILD_TAG} ${REGISTRY}/shiv/${IMAGE_NAME_BACKEND}:${BUILD_TAG}
+                        docker push ${REGISTRY}/shiv/${IMAGE_NAME_BACKEND}:${BUILD_TAG}
                         """
                     }
                 }
@@ -140,7 +140,7 @@ pipeline {
                         -e SPRING_DATASOURCE_URL=${SPRING_DATASOURCE_URL} \
                         -e SPRING_DATASOURCE_USERNAME=${SPRING_DATASOURCE_USERNAME} \
                         -e SPRING_DATASOURCE_PASSWORD=${SPRING_DATASOURCE_PASSWORD} \
-                        -p 9080:9090 ${REGISTRY}/shiva/${IMAGE_NAME_BACKEND}:${BUILD_TAG}
+                        -p 9080:9090 ${REGISTRY}/shiv/${IMAGE_NAME_BACKEND}:${BUILD_TAG}
                     """
                 }
             }
