@@ -4,7 +4,7 @@ pipeline {
     environment {
         REGISTRY = "docker.io"
         IMAGE_NAME_BACKEND= "grandspace-fullstack"
-        DOCKER_CREDENTIALS_ID = 'dockerhub-credentials'  // Update this to your Docker Hub credentials ID in Jenkins
+        DOCKER_CREDENTIALS_ID = 'cyfdoc'  // Update this to your Docker Hub credentials ID in Jenkins
         BUILD_TAG = "${env.BUILD_NUMBER}"
         SPRING_DATASOURCE_URL = "jdbc:mysql://172.22.0.2:3306/grandspace?createDatabaseIfNotExist=true" // Updated hostname to 'db' as per Docker network
         SPRING_DATASOURCE_USERNAME = "root"
