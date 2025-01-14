@@ -25,10 +25,6 @@ pipeline {
                 script {
                     echo "Cloning repository..."
                     checkout scm
-                    echo "Listing files in workspace root..."
-                    sh "ls -l"
-                    echo "Listing files in GrandSpaceProject directory..."
-                    sh "ls -l GrandSpaceProject"
                 }
             }
         }
