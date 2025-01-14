@@ -100,20 +100,21 @@ pipeline {
             }
         }
 
-        stage('Build GrandSpaceProject') {
+         stage('Build GrandSpaceProject') {
             steps {
                 dir('GrandSpaceProject') {
                     script {
                         echo "Building GrandSpaceProject..."
-                        sh 'mvn clean install -f GrandSpaceProject/pom.xml'
+                        sh 'mvn clean install'
                         echo "Building Docker image for GrandSpaceProject..."
                         sh """
-                        docker build -t ${REGISTRY}/${IMAGE_NAME_BACKEND}:${BUILD_TAG} -f Dockerfile .
+                        docker build -t ${REGISTRY}/${IMAGE_NAME_BACKEND}:${BUILD_TAG} .
                         """
                     }
                 }
             }
         }
+
 
         stage('Push Images to Docker Hub') {
             steps {
