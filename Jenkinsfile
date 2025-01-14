@@ -3,16 +3,16 @@ pipeline {
 
     environment {
         REGISTRY = "docker.io"
-        IMAGE_NAME_BACKEND = "grandspace-fullstack"
+        IMAGE_NAME_BACKEND = "mygr"
         DOCKER_CREDENTIALS_ID = 'cyfdoc'  // Update this to your Docker Hub credentials ID in Jenkins
         BUILD_TAG = "${env.BUILD_NUMBER}"
         SPRING_DATASOURCE_URL = "jdbc:mysql://172.22.0.2:3306/grandspace?createDatabaseIfNotExist=true"
         SPRING_DATASOURCE_USERNAME = "root"
         SPRING_DATASOURCE_PASSWORD = "root"
-        DOCKER_NETWORK = "grandspace_network"
-        DB_CONTAINER = "grandspace-db"
-        PHPMYADMIN_CONTAINER = "grandspace-phpmyadmin"
-        BACKEND_CONTAINER = "grandspace-container"
+        DOCKER_NETWORK = "mygr_network"
+        DB_CONTAINER = "mygr-db"
+        PHPMYADMIN_CONTAINER = "mygrphpadmin"
+        BACKEND_CONTAINER = "mygr-container"
     }
 
     tools {
